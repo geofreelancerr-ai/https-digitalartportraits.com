@@ -1,0 +1,31 @@
+{
+  "name": "digital-art-portraits-cloudflare",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "pnpm build && wrangler deploy",
+    "cf:db:apply": "wrangler d1 execute digital-art-portraits-orders --remote --file=src/schema.sql"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "lucide-react": "^0.453.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sonner": "^2.0.7",
+    "wouter": "^3.3.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.13.0",
+    "@cloudflare/workers-types": "^5.20260827.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vitest": "^2.1.4",
+    "wrangler": "^4.34.0"
+  }
+}
