@@ -1,0 +1,6 @@
+import { ExternalLink, ShieldCheck } from "lucide-react";
+import { Link } from "wouter";
+
+export default function AdminDownloads() {
+  return <section className="owner-downloads"><div className="owner-downloads__heading"><p className="eyebrow">Owner workspace · fulfilment</p><h1>Share masters<br /><em>privately.</em></h1><p>Your high-resolution portraits stay in your restricted Google Drive. This keeps the original files out of the public website.</p></div><aside className="master-security-note"><ShieldCheck size={24} /><div><p className="eyebrow">Restricted Google Drive fulfilment</p><h2>Share one purchased file at a time.</h2><p>After you independently verify the payment, open the exact master in Google Drive. Keep the file set to <strong>Restricted</strong> and add only the confirmed buyer’s email as a viewer.</p><ul><li>Share the individual portrait file, never the folder with all masters.</li><li>Do not use “Anyone with the link.”</li><li>Confirm the buyer email matches the order before sending.</li><li>No website can fully prevent a genuine buyer from sharing a file after download.</li></ul></div></aside><Link className="button button--dark" href="/owner/orders">Return to Owner Orders <ExternalLink size={18} /></Link></section>;
+}
