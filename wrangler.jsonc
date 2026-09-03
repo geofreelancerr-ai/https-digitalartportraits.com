@@ -6,7 +6,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": { "directory": "./dist", "binding": "ASSETS", "not_found_handling": "single-page-application" },
   "d1_databases": [
-    { "binding": "DB", "database_name": "digital-art-portraits-orders", "database_id": "REPLACE_AFTER_CREATING_D1" }
+    { "binding": "DB", "database_name": "digital-art-portraits-orders", "database_id": "f74946c2-9969-48d2-aa62-9fc7197d046d" }
   ],
   "r2_buckets": [
     { "binding": "RECEIPTS", "bucket_name": "digital-art-portraits-receipts" }
