@@ -9,24 +9,26 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function Artwork() {
   const [, params] = useRoute("/artwork/:handle");
-  const artwork = params?.handle ? catalogByHandle.get(params.handle) : undefined;
+  const artworkHandle = params?.handle ?? "";
+  const artwork = artworkHandle ? catalogByHandle.get(artworkHandle) : undefined;
   const { addArtwork } = useCart();
   const [activeIndex, setActiveIndex] = useState(0);
-  if (!artwork) return <section className="empty-state"><h1>That work is not in the gallery.</h1><Link href="/catalog" className="button button--dark">Return to gallery</Link></section>;
-  const media = artworkMediaByHandle[artwork.handle];
+  const media = artwork ? artworkMediaByHandle[artwork.handle] : undefined;
   const slides = useMemo(() => [
-    { url: artwork.image, label: "Artwork", kind: "artwork" as const },
+    ...(artwork ? [{ url: artwork.image, label: "Artwork", kind: "artwork" as const }] : []),
     ...(media?.gallery ?? []),
     ...(media?.video ? [{ url: media.video, label: "Motion preview", kind: "video" as const }] : []),
-  ], [artwork.image, media?.gallery, media?.video]);
+  ], [artwork, media?.gallery, media?.video]);
   const activeSlide = slides[activeIndex] ?? slides[0];
-  const mockupCount = media?.gallery.filter(item => item.kind === "mockup").length ?? 0;
-  const sourceDescription = sourceArtworkDescriptions[artwork.handle];
-  const whatsappHref = `https://wa.me/96170124873?text=${encodeURIComponent(`Hello George, I am interested in “${artwork.title}” from the ${artwork.collection} collection (${formatUSD(artwork.priceCents)}). Could you please explain the payment and delivery process?`)}`;
+  const mockupCount = media?.gallery?.filter(item => item.kind === "mockup").length ?? 0;
+  const sourceDescription = artwork ? sourceArtworkDescriptions[artwork.handle] : undefined;
+  const whatsappHref = artwork ? `https://wa.me/96170124873?text=${encodeURIComponent(`Hello George, I am interested in “${artwork.title}” from the ${artwork.collection} collection (${formatUSD(artwork.priceCents)}). Could you please explain the payment and delivery process?`)}` : "https://wa.me/96170124873";
   useEffect(() => {
     setActiveIndex(0);
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [artwork.handle]);
+  }, [artworkHandle]);
+
+  if (!artwork) return <section className="empty-state"><h1>That work is not in the gallery.</h1><Link href="/catalog" className="button button--dark">Return to gallery</Link></section>;
 
   return <section className="artwork-detail">
     <Link href="/catalog" className="back-link"><ArrowLeft size={16} /> Back to gallery</Link>
